@@ -13,15 +13,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  justify-content: space-around;
 }
 
 .board {
   display: grid;
-  grid-template-columns: repeat(3, 200px);
-  grid-template-rows: repeat(3, 200px);
-  gap: 5px;
+  grid-template-columns: repeat(3, 180px);
+  grid-template-rows: repeat(3, 180px);
+  gap: 3px;
 }
 
 .cell {
@@ -36,4 +35,14 @@ body {
 
 .cell:hover {
   background-color: #d8d1d1;
+}
+
+@media (max-width: 600px) {
+  .container {
+    justify-content: center;
+    gap: 30px;
+  }
+  .main-btn {
+    scale: 140%;
+  }
 }
