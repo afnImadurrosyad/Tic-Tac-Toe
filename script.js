@@ -1,23 +1,39 @@
-// Variables to keep track of the game state
+// Variables
 let board = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = "X";
 let gameOver = false;
 
-// Function to make a move when a cell is clicked
+// Function basic saat event click on object
 function makeMove(index) {
   if (board[index] === "" && !gameOver) {
     board[index] = currentPlayer;
     document.getElementsByClassName("cell")[index].textContent = currentPlayer;
     if (checkWinner()) {
       gameOver = true;
-      alert(currentPlayer + " wins!");
+      if (currentPlayer === "O") {
+        Swal.fire({
+          title: `You Lose ${currentPlayer} win`,
+          icon: `error`,
+          text: `Lets try again`,
+        });
+      } else {
+        Swal.fire({
+          title: `Good Game! You win`,
+          icon: `succes`,
+          text: `Lets Play again`,
+        });
+      }
     } else if (checkDraw()) {
       gameOver = true;
-      alert("It's a draw!");
+      Swal.fire({
+        title: `Nice Try,`,
+        icon: `info`,
+        text: `Lets Play again, Until You win`,
+      });
     } else {
       togglePlayer();
       if (currentPlayer === "O") {
-        // AI player's turn
+        // Comp Turn Change
         let bestMove = findBestMove();
         makeMove(bestMove);
       }
@@ -25,12 +41,12 @@ function makeMove(index) {
   }
 }
 
-// Function to toggle between 'X' and 'O'
+// toggle between 'X' and 'O'
 function togglePlayer() {
   currentPlayer = currentPlayer === "X" ? "O" : "X";
 }
 
-// Function to check for a winner
+//  for a winner
 function checkWinner() {
   const winningCombinations = [
     [0, 1, 2],
@@ -46,28 +62,28 @@ function checkWinner() {
   for (const combination of winningCombinations) {
     const [a, b, c] = combination;
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-      return true; // We have a winner
+      return true;
     }
   }
 
-  return false; // No winner yet
+  return false;
 }
 
 // Function to check for a draw
 function checkDraw() {
-  return board.every((cell) => cell !== ""); // Check if all cells are filled
+  return board.every((cell) => cell !== "");
 }
 
-// Function to find the best move for AI using the minimax algorithm
+// Function AI using the minimax algorithm
 function findBestMove() {
   let bestScore = -Infinity;
   let bestMove;
 
   for (let i = 0; i < 9; i++) {
     if (board[i] === "") {
-      board[i] = "O"; // Try a move
-      let score = minimax(board, 0, false); // Get the score for this move
-      board[i] = ""; // Undo the move
+      board[i] = "O";
+      let score = minimax(board, 0, false);
+      board[i] = "";
 
       if (score > bestScore) {
         bestScore = score;
@@ -79,7 +95,7 @@ function findBestMove() {
   return bestMove;
 }
 
-// Minimax algorithm for AI decision making
+// Minimax algorithm
 function minimax(board, depth, isMaximizing) {
   if (checkWinner()) {
     return isMaximizing ? -10 + depth : 10 - depth;
@@ -121,3 +137,18 @@ document.querySelector("#btnMain").addEventListener("click", () => {
   gameOver = false;
   currentPlayer = "X";
 });
+
+// function untuk toast
+// var toast = document.getElementById("liveToast");
+// var bsToast = new bootstrap.Toast(toast);
+
+// function alertToast(menang, currentPlayer) {
+//   // Get the toast element
+//   let toastBody = document.getElementById("badannya");
+//   if (menang) {
+//     toastBody.innerText = `${currentPlayer} Is a Winner`;
+//   } else {
+//     toastBody.innerText = "It's a draw";
+//   }
+//   bsToast.show();
+// }
