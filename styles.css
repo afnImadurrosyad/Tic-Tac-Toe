@@ -52,7 +52,7 @@ body {
   border-color: #0a58ca;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   .container {
     justify-content: center;
     gap: 30px;
