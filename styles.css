@@ -52,12 +52,18 @@ body {
   border-color: #0a58ca;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .container {
     justify-content: center;
     gap: 30px;
   }
   .main-btn {
-    scale: 140%;
+    scale: 150%;
+  }
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(3, 200px);
+    gap: 2px;
   }
 }
