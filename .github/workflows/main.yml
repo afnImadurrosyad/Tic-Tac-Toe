@@ -20,5 +20,5 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./ # Set the local directory to your build output
-        server-dir: ./htdocs/tictactoe  # Set the correct remote directory on your FTP server
+        server-dir: ./htdocs/tictactoe/  # Set the correct remote directory on your FTP server
 
